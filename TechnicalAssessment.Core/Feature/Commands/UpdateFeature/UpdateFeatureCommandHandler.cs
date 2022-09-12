@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TechnicalAssessment.Core.Exceptions;
+﻿using TechnicalAssessment.Core.Exceptions;
 using TechnicalAssessment.Core.Interfaces;
 
 namespace TechnicalAssessment.Core.Feature.Commands.UpdateFeature
@@ -25,7 +20,19 @@ namespace TechnicalAssessment.Core.Feature.Commands.UpdateFeature
                 throw new NotModifiedException("Feature not found in our database.");
             }
 
-            _repository.Update(feature, command.enable);
+            try
+            {
+                _repository.Update(feature, command.enable);
+            }
+            catch (EntityException ex)
+            {
+                // _logger.log
+                throw new NotModifiedException("Failure on updating to database.");
+            }
+            catch (Exception ex)
+            {
+                throw new InternalServerException("Server error on updating database.");
+            }
         }
     }
 }
