@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TechnicalAssessment.Core.Feature.Commands.UpdateFeature;
-using TechnicalAssessment.Core.Feature.Queries.GetFeature;
 
 namespace TechnicalAssessment.Core.Interfaces
 {
-    interface IFeatureRepository
+    public interface IFeatureRepository
     {
-        GetFeatureResponse Get(GetFeatureQuery query);
-        void Update(UpdateFeatureCommand command);
+        // if query become complex, declare custom type in Core
+        // instead of directly reference to Persistance
+        Persistance.Feature? Get(string email, string featureName);
+        void Update(Persistance.Feature feature, bool enabled);
     }
 }

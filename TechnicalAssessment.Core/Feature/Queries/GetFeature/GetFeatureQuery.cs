@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TechnicalAssessment.Core.Feature.Queries.GetFeature
 {
-    internal class GetFeatureQuery
+    public class GetFeatureQuery
     {
         public string email { get; set; }
         public string featureName { get; set; }

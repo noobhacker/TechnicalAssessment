@@ -17,3 +17,5 @@ Actually no, exception are in core and infra depends on core.
 Dependency Inversion by putting core logic into .Core.
 
 do not mix dto and database orm entities. Always think can reuse but shoot myself in the foot.
+
+enabled is in database so later on can add other flags

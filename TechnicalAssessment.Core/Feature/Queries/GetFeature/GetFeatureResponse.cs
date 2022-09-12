@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TechnicalAssessment.Core.Feature.Queries.GetFeature
 {
-    internal class GetFeatureResponse
+    public class GetFeatureResponse
     {
         public bool canAccess { get; set; }
     }

@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace TechnicalAssessment.Core.Exceptions
 {
-    public class NotModifiedException : Exception
+    public class NotFoundException : Exception
     {
-        public NotModifiedException(string? message) : base(message)
-        {
-        }
     }
 }

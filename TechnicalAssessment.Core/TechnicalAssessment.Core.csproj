@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TechnicalAssessment.Persistance\TechnicalAssessment.Persistance.csproj" />
+  </ItemGroup>
+
 </Project>
