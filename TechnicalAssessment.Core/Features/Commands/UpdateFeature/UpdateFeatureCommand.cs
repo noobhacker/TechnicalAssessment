@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechnicalAssessment.Core.Feature.Commands.UpdateFeature
+namespace TechnicalAssessment.Core.Features.Commands.UpdateFeature
 {
     public class UpdateFeatureCommand
     {

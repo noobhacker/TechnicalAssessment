@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TechnicalAssessment.Core.Feature.Queries.GetFeature
+namespace TechnicalAssessment.Core.Features.Queries.GetFeature
 {
     public class GetFeatureQuery
     {

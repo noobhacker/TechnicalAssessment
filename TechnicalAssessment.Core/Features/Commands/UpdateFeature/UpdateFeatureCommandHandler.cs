@@ -1,7 +1,7 @@
 ﻿using TechnicalAssessment.Core.Exceptions;
 using TechnicalAssessment.Core.Interfaces;
 
-namespace TechnicalAssessment.Core.Feature.Commands.UpdateFeature
+namespace TechnicalAssessment.Core.Features.Commands.UpdateFeature
 {
     public class UpdateFeatureCommandHandler
     {

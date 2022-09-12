@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TechnicalAssessment.Core.Exceptions;
 using TechnicalAssessment.Core.Interfaces;
 
-namespace TechnicalAssessment.Core.Feature.Queries.GetFeature
+namespace TechnicalAssessment.Core.Features.Queries.GetFeature
 {
     public class GetFeatureQueryHandler
     {
