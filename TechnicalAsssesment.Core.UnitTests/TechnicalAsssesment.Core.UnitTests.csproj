@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TechnicalAssessment.Core\TechnicalAssessment.Core.csproj" />
+    <ProjectReference Include="..\TechnicalAssessment.Persistance\TechnicalAssessment.Persistance.csproj" />
   </ItemGroup>
 
 </Project>

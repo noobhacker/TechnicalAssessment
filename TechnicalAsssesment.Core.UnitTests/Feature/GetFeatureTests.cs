@@ -1,3 +1,6 @@
+using TechnicalAssessment.Core.Exceptions;
+using TechnicalAssessment.Core.Features.Queries.GetFeature;
+
 namespace TechnicalAsssesment.Core.UnitTests.Feature
 {
     public class GetFeatureTests
@@ -5,12 +8,19 @@ namespace TechnicalAsssesment.Core.UnitTests.Feature
         [SetUp]
         public void Setup()
         {
+
         }
 
         [Test]
         public void GivenRecordNotFound_ReturnNotModified()
         {
-            Assert.Pass();
+            var handler = new GetFeatureQueryHandler(new MockRecordNotFoundRepository());
+
+            Assert.Throws<NotFoundException>(() => handler.Handle(new GetFeatureQuery
+            {
+
+            }));
+
         }
     }
 }
