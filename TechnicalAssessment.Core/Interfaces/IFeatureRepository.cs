@@ -10,7 +10,7 @@ namespace TechnicalAssessment.Core.Interfaces
     {
         // if query become complex, declare custom type in Core
         // instead of directly reference to Persistance
-        Persistance.Feature? Get(string email, string featureName);
-        void Update(Persistance.Feature feature, bool enabled);
+        bool GetEnabled(string email, string featureName);
+        void Update(string email, string featureName, bool enabled);
     }
 }

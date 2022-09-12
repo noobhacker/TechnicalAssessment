@@ -19,15 +19,11 @@ namespace TechnicalAssessment.Core.Features.Queries.GetFeature
 
         public GetFeatureResponse Handle(GetFeatureQuery query)
         {
-            var feature = _repository.Get(query.email, query.featureName);
-            if(feature == null)
-            {
-                throw new NotFoundException();
-            }
+            var enabled = _repository.GetEnabled(query.email, query.featureName);
 
             return new GetFeatureResponse
             {
-                canAccess = feature.Enabled
+                canAccess = enabled
             };
         }
     }
