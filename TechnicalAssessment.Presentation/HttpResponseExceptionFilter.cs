@@ -2,11 +2,19 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 using TechnicalAssessment.Core.Exceptions;
+using TechnicalAssessment.Presentation.Controllers;
 
 namespace TechnicalAssessment.Presentation
 {
     public class HttpResponseExceptionFilter : IActionFilter, IOrderedFilter
     {
+        private readonly ILogger<HttpResponseExceptionFilter> _logger;
+
+        public HttpResponseExceptionFilter(ILogger<HttpResponseExceptionFilter> logger)
+        {
+            _logger = logger;
+        }
+
         public int Order => int.MaxValue - 10;
 
         public void OnActionExecuting(ActionExecutingContext context) { }
@@ -26,6 +34,8 @@ namespace TechnicalAssessment.Presentation
                 {
                     StatusCode = (int)HttpStatusCode.InternalServerError
                 };
+
+                _logger.LogWarning($"Unhandled internal server error: \n{context.Exception?.Message}\n{context.Exception?.StackTrace}");
             }
 
             context.ExceptionHandled = true;

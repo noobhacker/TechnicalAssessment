@@ -9,7 +9,7 @@ using TechnicalAssessment.Persistance;
 
 namespace TechnicalAssessment.Infrastructure.Repositories
 {
-    internal class FeatureRepository : IFeatureRepository
+    public class FeatureRepository : IFeatureRepository
     {
         private readonly DatabaseContext _context;
 
