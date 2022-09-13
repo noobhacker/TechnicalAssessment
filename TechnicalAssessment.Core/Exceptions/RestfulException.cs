@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace TechnicalAssessment.Core.Exceptions
 {
-    public class BadRequestException : RestfulException
+    public abstract class RestfulException : Exception
     {
-        public BadRequestException(string? message) : base(message)
+        protected RestfulException(string? message) : base(message)
         {
         }
 
-        public override HttpStatusCode HttpCode => HttpStatusCode.BadRequest;
+        public abstract HttpStatusCode HttpCode { get; }
     }
 }

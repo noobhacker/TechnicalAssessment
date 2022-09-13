@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace TechnicalAssessment.Core.Exceptions
 {
-    public class NotFoundException : Exception, IRestfulException
+    public class NotFoundException : RestfulException
     {
         public NotFoundException(string? message) : base(message)
         {
         }
 
-        public HttpStatusCode HttpCode => HttpStatusCode.NotFound;
+        public override HttpStatusCode HttpCode => HttpStatusCode.NotFound;
     }
 }
