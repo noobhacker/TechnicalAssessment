@@ -21,3 +21,5 @@ do not mix dto and database orm entities. Always think can reuse but shoot mysel
 enabled is in database so later on can add other flags
 
 as long as decoupling techniques are introduce to make code more testable, it is not having too much abstraction layers.
+
+Core = isolated from infrastructure like rest server and database.
