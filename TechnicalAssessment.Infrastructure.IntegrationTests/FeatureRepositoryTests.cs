@@ -19,31 +19,26 @@ namespace TechnicalAssessment.Infrastructure.IntegrationTests
                 .Options;
 
             using var context = new DatabaseContext(contextOptions);
-            if (context.Database.EnsureCreated)
-            {
-                context.FeatureNames.AddRange(
-                    new FeatureName { Name = "Feature1" },
-                    new FeatureName { Name = "Feature2" });
+            //if (context.Database.EnsureCreated)
+            //{
+            //    context.FeatureNames.AddRange(
+            //        new FeatureName { Name = "Feature1" },
+            //        new FeatureName { Name = "Feature2" });
 
-                context.SaveChanges();
+            //    context.SaveChanges();
 
-                context.Features.AddRange(
-                    new Feature { FeatureNameId = 1, Email = "test@test.com", Enabled = true },
-                    new Feature { FeatureNameId = 1, Email = "test2@test2.com", Enabled = false });
+            //    context.Features.AddRange(
+            //        new Feature { FeatureNameId = 1, Email = "test@test.com", Enabled = true },
+            //        new Feature { FeatureNameId = 1, Email = "test2@test2.com", Enabled = false });
 
-                context.SaveChanges();
-            }
+            //    context.SaveChanges();
+            //}
         }
 
         [Test]
         public void Test1()
         {
             Assert.Pass();
-        }
-
-        private DatabaseContext GetPrepopulatedDatabase()
-        {
-            
         }
     }
 }
