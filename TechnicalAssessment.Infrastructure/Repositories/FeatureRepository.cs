@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechnicalAssessment.Core.Exceptions;
-using TechnicalAssessment.Core.Feature.Commands.UpdateFeature;
-using TechnicalAssessment.Core.Feature.Queries.GetFeature;
 using TechnicalAssessment.Core.Interfaces;
 using TechnicalAssessment.Persistance;
 
@@ -42,7 +40,7 @@ namespace TechnicalAssessment.Infrastructure.Repositories
 
             if (feature is null)
             {
-                throw new NotFoundException("Email or feature name not found in our database");
+                throw new NotModifiedException("Email or feature name not found in our database.");
             }
 
             feature.Enabled = enabled;

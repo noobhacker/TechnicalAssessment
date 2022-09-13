@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TechnicalAssessment.Core\TechnicalAssessment.Core.csproj" />
-    <ProjectReference Include="..\TechnicalAssessment.Persistance\TechnicalAssessment.Persistance.csproj" />
+    <ProjectReference Include="..\TechnicalAssessment.Core\Core.csproj" />
+    <ProjectReference Include="..\TechnicalAssessment.Persistance\Persistance.csproj" />
   </ItemGroup>
 
 </Project>

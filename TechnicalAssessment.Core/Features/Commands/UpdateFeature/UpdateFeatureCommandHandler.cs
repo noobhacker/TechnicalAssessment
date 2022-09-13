@@ -14,19 +14,12 @@ namespace TechnicalAssessment.Core.Features.Commands.UpdateFeature
 
         public void Handle(UpdateFeatureCommand command)
         {
-            var feature = _repository.Get(command.email, command.featureName);
-            if (feature == null)
-            {
-                throw new NotModifiedException("Feature not found in our database.");
-            }
-
             try
             {
-                _repository.Update(feature, command.enable);
+                _repository.Update(command.email, command.featureName, command.enable);
             }
             catch (EntityException ex)
             {
-                // _logger.log
                 throw new NotModifiedException("Failure on updating to database.");
             }
             catch (Exception ex)
