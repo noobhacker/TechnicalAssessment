@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Net;
 using TechnicalAssessment.Core.Exceptions;
 
 namespace TechnicalAssessment.Presentation
@@ -18,9 +19,16 @@ namespace TechnicalAssessment.Presentation
                 {
                     StatusCode = (int)httpResponseException.HttpCode
                 };
-
-                context.ExceptionHandled = true;
+            } 
+            else
+            {
+                context.Result = new ObjectResult(context.Exception?.Message)
+                {
+                    StatusCode = (int)HttpStatusCode.InternalServerError
+                };
             }
+
+            context.ExceptionHandled = true;
         }
     }
 }
