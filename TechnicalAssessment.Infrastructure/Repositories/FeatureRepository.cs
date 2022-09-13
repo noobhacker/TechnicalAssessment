@@ -18,33 +18,40 @@ namespace TechnicalAssessment.Infrastructure.Repositories
             _context = context;
         }
 
-        public bool GetEnabled(string email, string featureName)
+        public Feature? Get(string email, string featureName)
         {
-            var feature = _context.Features.FirstOrDefault(x =>
+            return _context.Features.FirstOrDefault(x =>
                 x.Email == email &&
                 x.FeatureName.Name == featureName);
-
-            if (feature is null)
-            {
-                throw new NotFoundException("Email or feature name not found in our database.");
-            }
-
-            return feature.Enabled;
         }
 
-        public void Update(string email, string featureName, bool enabled)
+        public void Add(string email, string featureName, bool enabled)
         {
-            var feature = _context.Features.FirstOrDefault(x =>
-                x.Email == email &&
-                x.FeatureName.Name == featureName);
-
-            if (feature is null)
+            _context.Features.Add(new Feature
             {
-                throw new NotModifiedException("Email or feature name not found in our database.");
-            }
+                Email = email,
+                FeatureNameId = GetFeatureNameId(featureName),
+                Enabled = enabled
+            });
 
-            feature.Enabled = enabled;
             _context.SaveChanges();
         }
+
+        private int GetFeatureNameId(string featureName)
+        {
+            var featureNameQuery = _context.FeatureNames.FirstOrDefault(x => x.Name == featureName);
+            if (featureNameQuery is null)
+            {
+                var newFeatureName = _context.FeatureNames.Add(new FeatureName
+                {
+                    Name = featureName
+                });
+                _context.SaveChanges();
+                return newFeatureName.Entity.Id;
+            }
+
+            return featureNameQuery.Id;
+        }
+
     }
 }

@@ -23,11 +23,16 @@ namespace TechnicalAssessment.Core.Features.Queries.GetFeature
             EmailValidator.Validate(query.email);
             FeatureNameValidator.Validate(query.featureName);
 
-            var enabled = _repository.GetEnabled(query.email, query.featureName);
+            var feature = _repository.Get(query.email, query.featureName);
+
+            if (feature is null)
+            {
+                throw new NotFoundException("Email or feature name not found in our database.");
+            }
 
             return new GetFeatureResponse
             {
-                canAccess = enabled
+                canAccess = feature.Enabled
             };
         }
     }

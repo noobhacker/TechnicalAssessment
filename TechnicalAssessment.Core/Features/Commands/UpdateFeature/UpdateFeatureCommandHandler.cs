@@ -18,7 +18,14 @@ namespace TechnicalAssessment.Core.Features.Commands.UpdateFeature
             EmailValidator.Validate(command.email);
             FeatureNameValidator.Validate(command.featureName);
 
-            _repository.Update(command.email, command.featureName, command.enable);
+            var featureQuery = _repository.Get(command.email, command.featureName);
+            if (featureQuery is not null)
+            {
+                throw new NotModifiedException("Email and feature name already in our database.");
+            }
+
+            _repository.Add(command.email, command.featureName, command.enable);
         }
+      
     }
 }
