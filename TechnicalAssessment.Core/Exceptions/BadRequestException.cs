@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace TechnicalAssessment.Core.Exceptions
 {
-    public class NotFoundException : Exception, IRestfulException
+    public class BadRequestException : Exception, IRestfulException
     {
-        public NotFoundException(string? message) : base(message)
+        public BadRequestException(string? message) : base(message)
         {
         }
 
-        public HttpStatusCode HttpCode => HttpStatusCode.NotFound;
+        public HttpStatusCode HttpCode => HttpStatusCode.BadRequest;
     }
 }

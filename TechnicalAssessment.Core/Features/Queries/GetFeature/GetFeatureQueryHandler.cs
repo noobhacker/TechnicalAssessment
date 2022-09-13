@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechnicalAssessment.Core.Exceptions;
+using TechnicalAssessment.Core.Features.Validators;
 using TechnicalAssessment.Core.Interfaces;
 
 namespace TechnicalAssessment.Core.Features.Queries.GetFeature
@@ -19,6 +20,9 @@ namespace TechnicalAssessment.Core.Features.Queries.GetFeature
 
         public GetFeatureResponse Handle(GetFeatureQuery query)
         {
+            EmailValidator.Validate(query.email);
+            FeatureNameValidator.Validate(query.featureName);
+
             var enabled = _repository.GetEnabled(query.email, query.featureName);
 
             return new GetFeatureResponse
