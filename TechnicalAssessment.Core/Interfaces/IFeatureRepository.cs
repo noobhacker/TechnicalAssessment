@@ -8,8 +8,6 @@ namespace TechnicalAssessment.Core.Interfaces
 {
     public interface IFeatureRepository
     {
-        // if query become complex, declare custom type in Core
-        // instead of directly reference to Persistance
         bool GetEnabled(string email, string featureName);
         void Update(string email, string featureName, bool enabled);
     }
