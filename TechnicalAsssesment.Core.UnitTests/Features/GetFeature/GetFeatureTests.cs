@@ -1,16 +1,10 @@
 using TechnicalAssessment.Core.Exceptions;
 using TechnicalAssessment.Core.Features.Queries.GetFeature;
 
-namespace TechnicalAsssesment.Core.UnitTests.Features
+namespace Core.UnitTests.Features.GetFeature
 {
     public class GetFeatureTests
     {
-        [SetUp]
-        public void Setup()
-        {
-
-        }
-
         [Test]
         public void GivenInvalidEmail_ReturnsBadRequest()
         {
@@ -18,11 +12,10 @@ namespace TechnicalAsssesment.Core.UnitTests.Features
 
             Assert.Throws<BadRequestException>(() => handler.Handle(new GetFeatureQuery
             {
-                 email = "...",
-                 featureName = "Feature1"
+                email = "...",
+                featureName = "Feature1"
             }));
         }
-
 
         [Test]
         public void GivenInvalidFeatureName_ReturnsBadRequest()
@@ -55,8 +48,8 @@ namespace TechnicalAsssesment.Core.UnitTests.Features
 
             var result = handler.Handle(new GetFeatureQuery
             {
-                 email = "test@test.com",
-                 featureName = "Feature1"
+                email = "test@test.com",
+                featureName = "Feature1"
             });
 
             Assert.IsTrue(result.canAccess);
