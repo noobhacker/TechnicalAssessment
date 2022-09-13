@@ -20,9 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.UnitTests", "TechnicalAsssesment.Core.UnitTests\Core.UnitTests.csproj", "{5CD9E973-9BEB-402B-A2B4-0BA6C56B2E5A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TechnicalAssessment.Presentation", "TechnicalAssessment.Presentation\TechnicalAssessment.Presentation.csproj", "{E923F06F-DA11-4EBC-9940-2D33AD663330}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "TechnicalAssessment.Presentation\Presentation.csproj", "{E923F06F-DA11-4EBC-9940-2D33AD663330}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechnicalAssessment.Infrastructure.IntegrationTests", "TechnicalAssessment.Infrastructure.IntegrationTests\TechnicalAssessment.Infrastructure.IntegrationTests.csproj", "{91AB1DD3-34E2-46EA-958C-9D8710C4DADA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.IntegrationTests", "TechnicalAssessment.Infrastructure.IntegrationTests\Infrastructure.IntegrationTests.csproj", "{91AB1DD3-34E2-46EA-958C-9D8710C4DADA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
