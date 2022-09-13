@@ -2,18 +2,18 @@
 using TechnicalAssessment.Core.Features.Validators;
 using TechnicalAssessment.Core.Interfaces;
 
-namespace TechnicalAssessment.Core.Features.Commands.UpdateFeature
+namespace TechnicalAssessment.Core.Features.Commands.AddFeature
 {
-    public class UpdateFeatureCommandHandler
+    public class AddFeatureCommandHandler
     {
         private readonly IFeatureRepository _repository;
 
-        public UpdateFeatureCommandHandler(IFeatureRepository repository)
+        public AddFeatureCommandHandler(IFeatureRepository repository)
         {
             _repository = repository;
         }
 
-        public void Handle(UpdateFeatureCommand command)
+        public void Handle(AddFeatureCommand command)
         {
             EmailValidator.Validate(command.email);
             FeatureNameValidator.Validate(command.featureName);

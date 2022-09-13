@@ -10,7 +10,7 @@ namespace TechnicalAssessment.Core.Features.Validators
 {
     public static class EmailValidator
     {
-        public static void Validate(string email)
+        public static bool Validate(string email)
         {
             try
             {
@@ -18,8 +18,10 @@ namespace TechnicalAssessment.Core.Features.Validators
             }
             catch
             {
-                throw new BadRequestException($"Email is in invalid format: {email}");
+                return false;
             }
+
+            return true;
         }
     }
 }
