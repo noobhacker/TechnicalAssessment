@@ -22,6 +22,10 @@ enabled is in database so later on can add other flags
 
 as long as decoupling techniques are introduce to make code more testable, it is not having too much abstraction layers.
 
+Presentation = swaggers, routings, maybe authentications. 
 Core = isolated from infrastructure like rest server and database.
+Infrastructure = Data access. Repository are created based on mocks needed (more test driven).
 
 NotModified when cant find email/feature, if connection issues goes to internal server error, if value is same then update anyway
+
+Based on my experience on how codebase expands and designed to expand with ease for the next 3-6 months.

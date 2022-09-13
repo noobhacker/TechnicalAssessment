@@ -12,8 +12,8 @@ namespace TechnicalAssessment.Persistance
     {
         public int Id { get; set; }
 
+        [Required]
         [StringLength(500)]
-        [Index(IsUnique = true)]
         public string Name { get; set; }
     }
 }

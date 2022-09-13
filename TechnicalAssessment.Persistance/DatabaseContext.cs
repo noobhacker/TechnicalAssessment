@@ -13,6 +13,13 @@ namespace TechnicalAssessment.Persistance
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FeatureName>()
+                .HasIndex(p => p.Name)
+                .IsUnique();
+        }
+
         public DbSet<Feature> Features { get; set; }
         public DbSet<FeatureName> FeatureNames { get; set; }
     }
