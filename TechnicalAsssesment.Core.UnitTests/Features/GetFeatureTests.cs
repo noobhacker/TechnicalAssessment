@@ -1,7 +1,7 @@
 using TechnicalAssessment.Core.Exceptions;
 using TechnicalAssessment.Core.Features.Queries.GetFeature;
 
-namespace Core.UnitTests.Features.GetFeature
+namespace TechnicalAssessment.Core.UnitTests.Features
 {
     public class GetFeatureTests
     {
@@ -32,7 +32,7 @@ namespace Core.UnitTests.Features.GetFeature
         [Test]
         public void GivenRecordNotFound_ReturnsNotFound()
         {
-            var handler = new GetFeatureQueryHandler(new MockFeatureNotFoundRepository());
+            var handler = new GetFeatureQueryHandler(new MockFeatureReturnsNothingRepository());
 
             Assert.Throws<NotFoundException>(() => handler.Handle(new GetFeatureQuery
             {

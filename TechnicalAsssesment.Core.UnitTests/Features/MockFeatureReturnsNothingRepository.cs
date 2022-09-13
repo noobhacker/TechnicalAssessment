@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using TechnicalAssessment.Core.Interfaces;
 using TechnicalAssessment.Persistance;
 
-namespace Core.UnitTests.Features.GetFeature
+namespace TechnicalAssessment.Core.UnitTests.Features
 {
-    public class MockFeatureNotFoundRepository : IFeatureRepository
+    public class MockFeatureReturnsNothingRepository : IFeatureRepository
     {
         public void Add(string email, string featureName, bool enabled)
         {

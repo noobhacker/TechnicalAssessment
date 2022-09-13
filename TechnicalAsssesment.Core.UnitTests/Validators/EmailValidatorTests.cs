@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TechnicalAssessment.Core.Validators;
 
-namespace Core.UnitTests.Validators
+namespace TechnicalAssessment.Core.UnitTests.Validators
 {
     public class EmailValidatorTests
     {

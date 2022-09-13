@@ -6,8 +6,6 @@
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
-
-    <RootNamespace>TechnicalAssessment.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TechnicalAssessment.Core\Core.csproj" />
     <ProjectReference Include="..\TechnicalAssessment.Persistance\Persistance.csproj" />
   </ItemGroup>
 
