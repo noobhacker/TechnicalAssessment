@@ -28,6 +28,7 @@ Infrastructure = Data access. Repository are created based on mocks needed (more
 
 NotModified when cant find email/feature, if connection issues goes to internal server error, if value is same then update anyway
 
+This may not be what I will do if I was asked to deliver this simple feature, but
 Based on my experience on how codebase expands and designed to expand with ease for the next 3-6 months.
 
 Excluded all async feature for clearer demo purpose.
