@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 using TechnicalAssessment.Core.Exceptions;
-using TechnicalAssessment.Presentation.Controllers;
 
 namespace TechnicalAssessment.Presentation
 {
@@ -27,7 +26,7 @@ namespace TechnicalAssessment.Presentation
                 {
                     StatusCode = (int)httpResponseException.HttpCode
                 };
-            } 
+            }
             else
             {
                 context.Result = new ObjectResult(context.Exception?.Message)

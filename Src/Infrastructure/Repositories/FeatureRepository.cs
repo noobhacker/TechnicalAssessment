@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TechnicalAssessment.Core.Exceptions;
-using TechnicalAssessment.Core.Interfaces;
+﻿using TechnicalAssessment.Core.Interfaces;
 using TechnicalAssessment.Persistance;
 
 namespace TechnicalAssessment.Infrastructure.Repositories

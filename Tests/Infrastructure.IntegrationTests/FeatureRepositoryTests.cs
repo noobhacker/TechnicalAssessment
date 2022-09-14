@@ -1,7 +1,5 @@
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using TechnicalAssessment.Infrastructure.Repositories;
-using TechnicalAssessment.Persistance;
 
 namespace TechnicalAssessment.Infrastructure.IntegrationTests
 {

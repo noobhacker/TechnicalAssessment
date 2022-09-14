@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TechnicalAssessment.Core.Interfaces;
+﻿using TechnicalAssessment.Core.Interfaces;
 using TechnicalAssessment.Persistance;
 
 namespace TechnicalAssessment.Core.UnitTests.Features

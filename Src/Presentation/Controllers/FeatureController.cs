@@ -11,7 +11,7 @@ namespace TechnicalAssessment.Presentation.Controllers
         private readonly GetFeatureQueryHandler _getHandler;
         private readonly AddFeatureCommandHandler _updateHandler;
 
-        public FeatureController(GetFeatureQueryHandler getHandler, 
+        public FeatureController(GetFeatureQueryHandler getHandler,
             AddFeatureCommandHandler updateHandler)
         {
             _getHandler = getHandler;
@@ -26,8 +26,8 @@ namespace TechnicalAssessment.Presentation.Controllers
         {
             return Ok(_getHandler.Handle(new GetFeatureQuery
             {
-                 email = email,
-                 featureName = featureName
+                email = email,
+                featureName = featureName
             }));
         }
 

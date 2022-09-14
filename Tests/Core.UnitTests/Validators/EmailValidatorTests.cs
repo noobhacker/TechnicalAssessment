@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TechnicalAssessment.Core.Validators;
+﻿using TechnicalAssessment.Core.Validators;
 
 namespace TechnicalAssessment.Core.UnitTests.Validators
 {

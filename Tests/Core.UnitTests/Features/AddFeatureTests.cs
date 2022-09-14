@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TechnicalAssessment.Core.Exceptions;
+﻿using TechnicalAssessment.Core.Exceptions;
 using TechnicalAssessment.Core.Features.Commands.AddFeature;
 using TechnicalAssessment.Core.UnitTests.Features;
 

@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using TechnicalAssessment.Core.Features.Commands.AddFeature;
 using TechnicalAssessment.Core.Features.Queries.GetFeature;
 using TechnicalAssessment.Core.Interfaces;

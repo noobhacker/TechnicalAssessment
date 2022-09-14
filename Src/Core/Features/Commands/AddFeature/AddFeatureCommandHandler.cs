@@ -15,7 +15,7 @@ namespace TechnicalAssessment.Core.Features.Commands.AddFeature
 
         public void Handle(AddFeatureCommand command)
         {
-            if(!EmailValidator.Validate(command.email))
+            if (!EmailValidator.Validate(command.email))
             {
                 throw new NotModifiedException("Email format is invalid.");
             }
@@ -38,6 +38,6 @@ namespace TechnicalAssessment.Core.Features.Commands.AddFeature
 
             _repository.Add(command.email, command.featureName, command.enable);
         }
-      
+
     }
 }
