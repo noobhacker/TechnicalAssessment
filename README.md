@@ -234,8 +234,8 @@ Infrastructure layer is 100% covered with integration tests done through SQlite 
 This project fully embraces exception propogation for much cleaner code that complies to the DRY principle. Most places should throw to halt the operation with proper http code returned. Ideally, there should be only one try catch handled by Web API server middleware, unless we need to transform the type of exception to another.
 
 # Database migrations
-Schema change: Use Presistance project, run: Add Migration
+Schema change: Use Presistance project, run: Add-Migration
 
 Apply changes: Use Presentation project, run: Update-Database
 
-(This is because the database credential is here)
+(This is because the database credential is the Presentation layer)
