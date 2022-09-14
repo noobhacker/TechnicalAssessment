@@ -1,5 +1,12 @@
 # TechnicalAssessment
 
+This project is designed with testability in mind.
+
+High level architecture design
+| Presentation | Handles routing, Swagger, endpoints. Serves as a catalog for Apis. Also catches exception propogation to return appropriate http status code. |
+| Core | Handles core logic, validation and data contracts.All other layers depends on Core. Designed with fully isolated testability in mind. |
+| Infrastructure | External implementations based on what Core needs. |
+
 isolate command and dto so core layer no need to know about its pass from header or body (least knowledge)
 
 ensure badrequest if input is null (better explict)
