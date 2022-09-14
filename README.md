@@ -1,45 +1,232 @@
 # TechnicalAssessment
 
-This project is designed with testability in mind.
+This project is 
+- With YAGNI principle applied, but also ensures highest testability. 
+- Designed based on how the project will expand for the next six months, based on my experience.
 
-High level architecture design
-| Presentation | Handles routing, Swagger, endpoints. Serves as a catalog for Apis. Also catches exception propogation to return appropriate http status code. |
-| Core | Handles core logic, validation and data contracts.All other layers depends on Core. Designed with fully isolated testability in mind. |
-| Infrastructure | External implementations based on what Core needs. |
+# High level architecture design
+Layer | Responsibility
+--- | ---
+Presentation | Handles routing, Swagger, endpoints. Serves as a catalog for Apis. Also catches exception propogation to return appropriate http status code.
+Core | Handles core logic, validation and data contracts. Designed with fully isolated testability in mind. All other layers depends on Core. 
+Infrastructure | External implementations such as database access based on what the Core needs. This layer is solely created so we can mock in the Core layer easier.
+Persistance | Database schema and migrations.
 
-isolate command and dto so core layer no need to know about its pass from header or body (least knowledge)
+# High level dependency graph
 
-ensure badrequest if input is null (better explict)
+```
+Presentation -> Core <- Infrastructure -> Persistance
+                 ^              ^              ^
+                 |              |              |
+             UnitTests          IntegrationTests
+```
 
-why cqrs: small, good folder management and based on my experience this kind of api can go big in very short time
-additional bi-product: can make use of extra read sql cluster for scalability
+# Low level codes
 
-assume all input are nullable, but output are not nullable
+FeatureController.cs
+```
+using Microsoft.AspNetCore.Mvc;
+using TechnicalAssessment.Core.Features.Commands.AddFeature;
+using TechnicalAssessment.Core.Features.Queries.GetFeature;
 
-simple and testability in mind, if abstraction helps in simplify testing, do it
+namespace TechnicalAssessment.Presentation.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class FeatureController : ControllerBase
+    {
+        private readonly GetFeatureQueryHandler _getHandler;
+        private readonly AddFeatureCommandHandler _updateHandler;
 
-violates some principle like directly return http code from Core layer
-Actually no, exception are in core and infra depends on core.
+        public FeatureController(GetFeatureQueryHandler getHandler,
+            AddFeatureCommandHandler updateHandler)
+        {
+            _getHandler = getHandler;
+            _updateHandler = updateHandler;
+        }
 
-Dependency Inversion by putting core logic into .Core.
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<GetFeatureResponse> Get(string email, string featureName)
+        {
+            return Ok(_getHandler.Handle(new GetFeatureQuery
+            {
+                email = email,
+                featureName = featureName
+            }));
+        }
 
-do not mix dto and database orm entities. Always think can reuse but shoot myself in the foot.
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status304NotModified)]
+        public ActionResult Post(AddFeatureCommand request)
+        {
+            _updateHandler.Handle(request);
 
-enabled is in database so later on can add other flags
+            return Ok();
+        }
+    }
+}
+```
 
-as long as decoupling techniques are introduce to make code more testable, it is not having too much abstraction layers.
+GetFeatureQueryHandler.cs
+```
+using TechnicalAssessment.Core.Exceptions;
+using TechnicalAssessment.Core.Interfaces;
+using TechnicalAssessment.Core.Validators;
 
-Presentation = swaggers, routings, maybe authentications. 
-Core = isolated from infrastructure like rest server and database.
-Infrastructure = Data access. Repository are created based on mocks needed (more test driven).
+namespace TechnicalAssessment.Core.Features.Queries.GetFeature
+{
+    public class GetFeatureQueryHandler
+    {
+        private readonly IFeatureRepository _repository;
 
-NotModified when cant find email/feature, if connection issues goes to internal server error, if value is same then update anyway
+        public GetFeatureQueryHandler(IFeatureRepository repository)
+        {
+            _repository = repository;
+        }
 
-This may not be what I will do if I was asked to deliver this simple feature, but
-Based on my experience on how codebase expands and designed to expand with ease for the next 3-6 months.
+        public GetFeatureResponse Handle(GetFeatureQuery query)
+        {
+            if (!EmailValidator.Validate(query.email))
+            {
+                throw new BadRequestException("Email format is invalid.");
+            }
+
+            if (string.IsNullOrEmpty(query.featureName))
+            {
+                throw new BadRequestException("featureName is empty.");
+            }
+
+            var feature = _repository.Get(query.email, query.featureName);
+
+            if (feature is null)
+            {
+                throw new NotFoundException("Email and feature name pair not found in our database.");
+            }
+
+            return new GetFeatureResponse
+            {
+                canAccess = feature.Enabled
+            };
+        }
+    }
+}
+```
+
+AddFeatureCommandHandler.cs
+```
+using TechnicalAssessment.Core.Exceptions;
+using TechnicalAssessment.Core.Interfaces;
+using TechnicalAssessment.Core.Validators;
+
+namespace TechnicalAssessment.Core.Features.Commands.AddFeature
+{
+    public class AddFeatureCommandHandler
+    {
+        private readonly IFeatureRepository _repository;
+
+        public AddFeatureCommandHandler(IFeatureRepository repository)
+        {
+            _repository = repository;
+        }
+
+        public void Handle(AddFeatureCommand command)
+        {
+            if (!EmailValidator.Validate(command.email))
+            {
+                throw new NotModifiedException("Email format is invalid.");
+            }
+
+            if (string.IsNullOrEmpty(command.featureName))
+            {
+                throw new NotModifiedException("featureName is empty.");
+            }
+
+            if (command.featureName.Length > 500)
+            {
+                throw new NotModifiedException("featureName is too long.");
+            }
+
+            var featureQuery = _repository.Get(command.email, command.featureName);
+            if (featureQuery is not null)
+            {
+                throw new NotModifiedException("Email and feature name already in our database.");
+            }
+
+            _repository.Add(command.email, command.featureName, command.enable);
+        }
+
+    }
+}
+```
+
+FeatureRepository.cs
+```
+using TechnicalAssessment.Core.Interfaces;
+using TechnicalAssessment.Persistance;
+
+namespace TechnicalAssessment.Infrastructure.Repositories
+{
+    public class FeatureRepository : IFeatureRepository
+    {
+        private readonly DatabaseContext _context;
+
+        public FeatureRepository(DatabaseContext context)
+        {
+            _context = context;
+        }
+
+        public Feature? Get(string email, string featureName)
+        {
+            return _context.Features.FirstOrDefault(x =>
+                x.Email == email &&
+                x.FeatureName.Name == featureName);
+        }
+
+        public void Add(string email, string featureName, bool enabled)
+        {
+            _context.Features.Add(new Feature
+            {
+                Email = email,
+                FeatureNameId = GetFeatureNameId(featureName),
+                Enabled = enabled
+            });
+
+            _context.SaveChanges();
+        }
+
+        private int GetFeatureNameId(string featureName)
+        {
+            var featureNameQuery = _context.FeatureNames.FirstOrDefault(x => x.Name == featureName);
+            if (featureNameQuery is null)
+            {
+                var newFeatureName = _context.FeatureNames.Add(new FeatureName
+                {
+                    Name = featureName
+                });
+                _context.SaveChanges();
+                return newFeatureName.Entity.Id;
+            }
+
+            return featureNameQuery.Id;
+        }
+
+    }
+}
+```
 
 Excluded all async feature for clearer demo purpose.
 
+# Unit tests
+Core layer is 100% covered with unit tests
 
-Database: Presistance Add Migration
-Presentation Update-Database (due to database credential is here)
+# Integration tests
+Infrastructure layre is 100% covered with integration tests done through SQlite in memory database. It not only tests the query but also able to test database schema. 
+
+# Database migrations
+Schema change: Use Presistance project, run: Add Migration
+Apply changes: Use Presentation project, run: Update-Database
+(This is because the database credential is here)
