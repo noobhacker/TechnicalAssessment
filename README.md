@@ -23,8 +23,8 @@ Presentation -> Core <- Infrastructure -> Persistance
 
 # Low level codes
 
-FeatureController.cs
-```
+Entry point and API catalog - FeatureController.cs
+```csharp
 using Microsoft.AspNetCore.Mvc;
 using TechnicalAssessment.Core.Features.Commands.AddFeature;
 using TechnicalAssessment.Core.Features.Queries.GetFeature;
@@ -71,8 +71,8 @@ namespace TechnicalAssessment.Presentation.Controllers
 }
 ```
 
-GetFeatureQueryHandler.cs
-```
+Core logic and validation for Get feature - GetFeatureQueryHandler.cs
+```csharp
 using TechnicalAssessment.Core.Exceptions;
 using TechnicalAssessment.Core.Interfaces;
 using TechnicalAssessment.Core.Validators;
@@ -116,8 +116,8 @@ namespace TechnicalAssessment.Core.Features.Queries.GetFeature
 }
 ```
 
-AddFeatureCommandHandler.cs
-```
+Core logic and validation for add feature - AddFeatureCommandHandler.cs
+```csharp
 using TechnicalAssessment.Core.Exceptions;
 using TechnicalAssessment.Core.Interfaces;
 using TechnicalAssessment.Core.Validators;
@@ -163,8 +163,8 @@ namespace TechnicalAssessment.Core.Features.Commands.AddFeature
 }
 ```
 
-FeatureRepository.cs
-```
+Database access for feature - FeatureRepository.cs
+```csharp
 using TechnicalAssessment.Core.Interfaces;
 using TechnicalAssessment.Persistance;
 
@@ -224,7 +224,7 @@ Excluded all async feature for clearer demo purpose.
 Core layer is 100% covered with unit tests
 
 # Integration tests
-Infrastructure layre is 100% covered with integration tests done through SQlite in memory database. It not only tests the query but also able to test database schema. 
+Infrastructure layer is 100% covered with integration tests done through SQlite in memory database. It not only tests the query but also able to test database schema. 
 
 # Database migrations
 Schema change: Use Presistance project, run: Add Migration
