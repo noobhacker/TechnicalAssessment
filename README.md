@@ -230,6 +230,9 @@ Core layer is 100% covered with unit tests
 # Integration tests
 Infrastructure layer is 100% covered with integration tests done through SQlite in memory database. It not only tests the query but also able to test database schema. 
 
+# Exception handling and logging
+This project fully embraces exception propogation for much cleaner code that complies to the DRY principle. Most places should throw to halt the operation with proper http code returned. Ideally, there should be only one try catch handled by Web API server middleware, unless we need to transform the type of exception to another.
+
 # Database migrations
 Schema change: Use Presistance project, run: Add Migration
 
