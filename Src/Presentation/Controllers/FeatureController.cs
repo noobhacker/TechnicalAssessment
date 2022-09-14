@@ -5,7 +5,7 @@ using TechnicalAssessment.Core.Features.Queries.GetFeature;
 namespace TechnicalAssessment.Presentation.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("feature")]
     public class FeatureController : ControllerBase
     {
         private readonly GetFeatureQueryHandler _getHandler;

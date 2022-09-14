@@ -27,14 +27,14 @@ namespace TechnicalAssessment.Presentation
                     StatusCode = (int)httpResponseException.HttpCode
                 };
             }
-            else
+            else if (context.Exception is not null)
             {
                 context.Result = new ObjectResult(context.Exception?.Message)
                 {
                     StatusCode = (int)HttpStatusCode.InternalServerError
                 };
 
-                _logger.LogWarning($"Unhandled internal server error: \n{context.Exception?.Message}\n{context.Exception?.StackTrace}");
+                _logger.LogError($"Unhandled internal server error: \n{context.Exception?.Message}\n{context.Exception?.StackTrace}");
             }
 
             context.ExceptionHandled = true;
