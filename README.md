@@ -117,6 +117,10 @@ namespace TechnicalAssessment.Core.Features.Queries.GetFeature
 ```
 
 Core logic and validation for add feature - AddFeatureCommandHandler.cs
+
+I notice that NotModified response cannot have body message, thus I suggest we could have some BadRequest in few of the scenario below. 
+
+In here I program everything according to the requirements document.
 ```csharp
 using TechnicalAssessment.Core.Exceptions;
 using TechnicalAssessment.Core.Interfaces;
