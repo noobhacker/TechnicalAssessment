@@ -44,6 +44,9 @@ namespace TechnicalAssessment.Persistance.Migrations
 
                     b.HasIndex("FeatureNameId");
 
+                    b.HasIndex("Email", "FeatureNameId")
+                        .IsUnique();
+
                     b.ToTable("Features");
                 });
 

@@ -1,44 +1,54 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using TechnicalAssessment.Infrastructure.Repositories;
 using TechnicalAssessment.Persistance;
 
 namespace TechnicalAssessment.Infrastructure.IntegrationTests
 {
-    public class Tests
+    public class FeatureRepositoryTests
     {
-        private DatabaseContext _context;
-
-        [SetUp]
-        public void Setup()
+        [Test]
+        public void Get_GivenExistsInput_ReturnsFeatureEnabled()
         {
-            var connection = new SqliteConnection("Filename=:memory:");
-            connection.Open();
+            using var context = new MockDatabaseContextFactory().Create();
+            var repository = new FeatureRepository(context);
 
-            var contextOptions = new DbContextOptionsBuilder<DatabaseContext>()
-                .UseSqlite(connection)
-                .Options;
+            var feature = repository.Get("test@test.com", "Feature1");
 
-            using var context = new DatabaseContext(contextOptions);
-            //if (context.Database.EnsureCreated)
-            //{
-            //    context.FeatureNames.AddRange(
-            //        new FeatureName { Name = "Feature1" },
-            //        new FeatureName { Name = "Feature2" });
-
-            //    context.SaveChanges();
-
-            //    context.Features.AddRange(
-            //        new Feature { FeatureNameId = 1, Email = "test@test.com", Enabled = true },
-            //        new Feature { FeatureNameId = 1, Email = "test2@test2.com", Enabled = false });
-
-            //    context.SaveChanges();
-            //}
+            Assert.IsTrue(feature?.Enabled);
         }
 
         [Test]
-        public void Test1()
+        public void Get_GivenNonExistingInput_ReturnsFeatureEnabled()
         {
-            Assert.Pass();
+            using var context = new MockDatabaseContextFactory().Create();
+            var repository = new FeatureRepository(context);
+
+            var feature = repository.Get("test@test.com", "Feature3");
+
+            Assert.That(feature, Is.EqualTo(null));
+        }
+
+        [Test]
+        public void Add_GivenCorrectInput_QueriesInsertedResult()
+        {
+            using var context = new MockDatabaseContextFactory().Create();
+            var repository = new FeatureRepository(context);
+
+            repository.Add("test3@test.com", "Feature3", true);
+
+            var query = repository.Get("test3@test.com", "Feature3");
+            Assert.That(query?.Enabled, Is.EqualTo(true));
+        }
+
+        [Test]
+        public void Add_GivenAlreadyExistInput_TriggersUniqueConstraintError()
+        {
+            using var context = new MockDatabaseContextFactory().Create();
+            var repository = new FeatureRepository(context);
+
+            Assert.Throws<DbUpdateException>(() => repository.Add("test@test.com", "Feature1", true));
+
         }
     }
 }

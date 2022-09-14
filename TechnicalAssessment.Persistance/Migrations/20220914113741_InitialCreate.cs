@@ -49,6 +49,12 @@ namespace TechnicalAssessment.Persistance.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Features_Email_FeatureNameId",
+                table: "Features",
+                columns: new[] { "Email", "FeatureNameId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Features_FeatureNameId",
                 table: "Features",
                 column: "FeatureNameId");

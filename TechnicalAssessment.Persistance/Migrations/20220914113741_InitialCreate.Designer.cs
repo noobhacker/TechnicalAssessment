@@ -11,7 +11,7 @@ using TechnicalAssessment.Persistance;
 namespace TechnicalAssessment.Persistance.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20220913165520_InitialCreate")]
+    [Migration("20220914113741_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,6 +45,9 @@ namespace TechnicalAssessment.Persistance.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("FeatureNameId");
+
+                    b.HasIndex("Email", "FeatureNameId")
+                        .IsUnique();
 
                     b.ToTable("Features");
                 });

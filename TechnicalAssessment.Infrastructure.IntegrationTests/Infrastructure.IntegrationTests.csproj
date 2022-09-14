@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TechnicalAssessment.Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\TechnicalAssessment.Persistance\Persistance.csproj" />
   </ItemGroup>
 

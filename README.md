@@ -32,3 +32,7 @@ This may not be what I will do if I was asked to deliver this simple feature, bu
 Based on my experience on how codebase expands and designed to expand with ease for the next 3-6 months.
 
 Excluded all async feature for clearer demo purpose.
+
+
+Database: Presistance Add Migration
+Presentation Update-Database (due to database credential is here)

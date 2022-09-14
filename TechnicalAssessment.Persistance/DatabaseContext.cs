@@ -18,6 +18,10 @@ namespace TechnicalAssessment.Persistance
             modelBuilder.Entity<FeatureName>()
                 .HasIndex(p => p.Name)
                 .IsUnique();
+
+            modelBuilder.Entity<Feature>()
+               .HasIndex(p => new { p.Email, p.FeatureNameId })
+               .IsUnique();
         }
 
         public DbSet<Feature> Features { get; set; }
