@@ -1,4 +1,6 @@
 # TechnicalAssessment
+![unitTests workflow](https://github.com/noobhacker/TechnicalAssessment/actions/workflows/unitTests.yml/badge.svg)
+![integrationTests workflow](https://github.com/noobhacker/TechnicalAssessment/actions/workflows/integrationTests.yml/badge.svg)
 
 This project is 
 - With YAGNI principle applied, but also ensures highest testability. 
