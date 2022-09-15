@@ -202,7 +202,7 @@ namespace TechnicalAssessment.Infrastructure.Repositories
             _context.SaveChanges();
         }
 
-        private int GetFeatureNameId(string featureName)
+        private int AddOrGetFeatureNameId(string featureName)
         {
             var featureNameQuery = _context.FeatureNames.FirstOrDefault(x => x.Name == featureName);
             if (featureNameQuery is null)
