@@ -24,14 +24,14 @@ namespace TechnicalAssessment.Infrastructure.Repositories
             _context.Features.Add(new Feature
             {
                 Email = email,
-                FeatureNameId = AddOrGetFeatureNameId(featureName),
+                FeatureNameId = GetOrAddFeatureNameId(featureName),
                 Enabled = enabled
             });
 
             _context.SaveChanges();
         }
 
-        private int AddOrGetFeatureNameId(string featureName)
+        private int GetOrAddFeatureNameId(string featureName)
         {
             var featureNameQuery = _context.FeatureNames.FirstOrDefault(x => x.Name == featureName);
             if (featureNameQuery is null)
