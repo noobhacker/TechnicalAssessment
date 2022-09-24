@@ -12,12 +12,12 @@ Layer | Responsibility
 Presentation | Handles routing, Swagger, endpoints. Serves as a catalog for Apis. Also catches exception propogation to return appropriate http status code.
 Core | Handles core logic, validation and data contracts. Designed with fully isolated testability in mind. All other layers depends on Core. 
 Infrastructure | External implementations such as database access based on what the Core needs. This layer is solely created so we can mock in the Core layer easier.
-Persistance | Database schema, index, constraints and migrations.
+Persistence | Database schema, index, constraints and migrations.
 
 # High level dependency graph
 
 ```
-Presentation -> Core <- Infrastructure -> Persistance
+Presentation -> Core <- Infrastructure -> Persistence
                  ^              ^              ^
                  |              |              |
              UnitTests          IntegrationTests
